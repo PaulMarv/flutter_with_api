@@ -11,37 +11,34 @@ class CategoryWidget extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: Container(
-        color: Colors.blue,
-        child: Stack(
-          children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(12),
-              child: FancyShimmerImage(
-                height: size.height * 0.45,
-                width: size.height * 0.45,
-                errorWidget: const Icon(
-                  IconlyBold.danger,
-                  color: Colors.red,
-                  size: 28,
-                ),
-                imageUrl: "https://i.ibb.co/vwB46Yq/shoes.png",
-                boxFit: BoxFit.fill,
+      child: Stack(
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.circular(12),
+            child: FancyShimmerImage(
+              height: size.height * 0.45,
+              width: size.height * 0.45,
+              errorWidget: const Icon(
+                IconlyBold.danger,
+                color: Colors.red,
+                size: 28,
               ),
+              imageUrl: "https://cdn.thewirecutter.com/wp-content/media/2021/02/whitesneakers-2048px-4187.jpg",
+              boxFit: BoxFit.fill,
             ),
-            Align(
-              child: Text(
-                'Cat Name', 
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-                backgroundColor: lightCardColor.withOpacity(0.8)
-              ),
-              ),
-            )
-          ],
-        ),
+          ),
+          Align(
+            child: Text(
+              'Cat Name', 
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+              backgroundColor: lightCardColor.withOpacity(0.8)
+            ),
+            ),
+          )
+        ],
       ),
     );
   }
