@@ -32,7 +32,9 @@ class _FeedsScreenState extends State<FeedsScreen> {
         title: const Text('All Products'),
       ),
       body: productsList.isEmpty 
-      ? Container() 
+      ? const Center(
+        child:  CircularProgressIndicator(),
+      ) 
       : GridView.builder(
         // shrinkWrap: true,
         // physics: const NeverScrollableScrollPhysics(),

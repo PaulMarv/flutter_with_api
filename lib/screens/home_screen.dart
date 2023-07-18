@@ -22,7 +22,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   late TextEditingController _textEditingController;
 
-  List<ProductsModel> productsList = [];
+  // List<ProductsModel> productsList = [];
 
   @override
   void initState() {
@@ -36,18 +36,18 @@ class _HomeScreenState extends State<HomeScreen> {
     super.dispose();
   }
 
-  @override
-  void didChangeDependencies() {
-    getProducts();
-    super.didChangeDependencies();
-  }
+  // @override
+  // void didChangeDependencies() {
+  //   getProducts();
+  //   super.didChangeDependencies();
+  // }
 
-  Future<void> getProducts() async {
-    productsList = await APIHandler.getAllProducts();
-    setState(() {
-      
-    });
-  }
+  // Future<void> getProducts() async {
+  //   productsList = await APIHandler.getAllProducts();
+  //   setState(() {
+
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -158,7 +158,31 @@ class _HomeScreenState extends State<HomeScreen> {
                             ],
                           ),
                         ),
-                        productsList.isEmpty ? Container() : FeedsGridWidget(productsList: productsList)
+                        FutureBuilder<List<ProductsModel>>(
+                            future: APIHandler.getAllProducts(),
+                            builder: (context, snapshot) {
+                              if (snapshot.connectionState ==
+                                  ConnectionState.waiting) {
+                                return  Center(
+                                  child: CircularProgressIndicator(
+                                    color: lightIconsColor,
+                                  ),
+                                );
+                              } else if (snapshot.hasError) {
+                                Center(
+                                  child: Text(
+                                      'An error occured ${snapshot.error}'),
+                                );
+                              } else if (snapshot.data == null) {
+                                const Center(
+                                  child: Text('No products has been added yet'),
+                                );
+                              }
+                              return FeedsGridWidget(
+                                productsList: snapshot.data!,
+                              );
+                            })
+                        // productsList.isEmpty ? Container() : FeedsGridWidget(productsList: productsList)
                       ],
                     ),
                   ),

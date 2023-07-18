@@ -2,14 +2,18 @@ import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
 import 'package:iconly/iconly.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:provider/provider.dart';
 import 'package:store_api_flutter_course/consts/global_colors.dart';
+import 'package:store_api_flutter_course/models/products_model.dart';
 import 'package:store_api_flutter_course/screens/product_details.dart';
 
 class Feedwidget extends StatelessWidget {
-  const Feedwidget ({Key? key, required this.title, required this.imageUrl}) : super( key: key);
+  const Feedwidget({Key? key, required this.title, required this.imageUrl})
+      : super(key: key);
   final String title, imageUrl;
   @override
   Widget build(BuildContext context) {
+    // final ProductsModel productsModelProvider = Provider.of<ProductsModel>(context);
     Size size = MediaQuery.of(context).size;
     return Padding(
         padding: const EdgeInsets.all(2.0),
@@ -65,14 +69,14 @@ class Feedwidget extends StatelessWidget {
                         color: Colors.red,
                         size: 28,
                       ),
-                      imageUrl:imageUrl,
+                      imageUrl: imageUrl,
                       boxFit: BoxFit.fill,
                     ),
                   ),
                   const SizedBox(
                     height: 10,
                   ),
-                    Padding(
+                  Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
                       title,
