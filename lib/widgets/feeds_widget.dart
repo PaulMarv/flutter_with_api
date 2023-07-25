@@ -8,12 +8,12 @@ import 'package:store_api_flutter_course/models/products_model.dart';
 import 'package:store_api_flutter_course/screens/product_details.dart';
 
 class Feedwidget extends StatelessWidget {
-  const Feedwidget({Key? key, required this.title, required this.imageUrl})
+  const Feedwidget({Key? key})
       : super(key: key);
-  final String title, imageUrl;
+
   @override
   Widget build(BuildContext context) {
-    // final ProductsModel productsModelProvider = Provider.of<ProductsModel>(context);
+    final ProductsModel productsModelProvider = Provider.of<ProductsModel>(context);
     Size size = MediaQuery.of(context).size;
     return Padding(
         padding: const EdgeInsets.all(2.0),
@@ -26,7 +26,7 @@ class Feedwidget extends StatelessWidget {
               Navigator.push(
                   context,
                   PageTransition(
-                      child: const ProductDetails(),
+                      child: ProductDetails(id: productsModelProvider.id.toString(),),
                       type: PageTransitionType.fade));
             },
             child: SingleChildScrollView(
@@ -45,7 +45,7 @@ class Feedwidget extends StatelessWidget {
                                       color: Color.fromRGBO(33, 150, 243, 1)),
                                   children: <TextSpan>[
                                 TextSpan(
-                                  text: '168.00',
+                                  text: '${productsModelProvider.price}',
                                   style: TextStyle(
                                       color: lightTextColor,
                                       fontWeight: FontWeight.w600),
@@ -69,7 +69,7 @@ class Feedwidget extends StatelessWidget {
                         color: Colors.red,
                         size: 28,
                       ),
-                      imageUrl: imageUrl,
+                      imageUrl: productsModelProvider.images![0],
                       boxFit: BoxFit.fill,
                     ),
                   ),
@@ -79,7 +79,7 @@ class Feedwidget extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
-                      title,
+                      productsModelProvider.title.toString(),
                       overflow: TextOverflow.ellipsis,
                       maxLines: 2,
                       style: const TextStyle(
